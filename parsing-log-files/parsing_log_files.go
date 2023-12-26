@@ -1,6 +1,9 @@
 package parsinglogfiles
 
-import "regexp"
+import (
+	"fmt"
+	"regexp"
+)
 
 func IsValidLine(text string) bool {
 	// the .* at the end is key. This matches any character
@@ -30,5 +33,20 @@ func RemoveEndOfLineText(text string) string {
 }
 
 func TagWithUserName(lines []string) []string {
-	panic("Please implement the TagWithUserName function")
+	// had to make a new string slice because original one wasn't mutating
+	new_lines := []string{}
+	re := regexp.MustCompile(`User \s*\b[a-zA-Z]+\d+\b`)
+	u_regexp := regexp.MustCompile(`\b[a-zA-Z]+\d+\b`)
+	for _, line := range lines {
+		if re.MatchString(line) {
+			username := u_regexp.FindString(line)
+			new_str := fmt.Sprintf("[USR] %s ", username)
+			line = new_str + line
+			fmt.Println("Line is: ", line)
+			new_lines = append(new_lines, line)
+		} else {
+			new_lines = append(new_lines, line)
+		}
+	}
+	return new_lines
 }
