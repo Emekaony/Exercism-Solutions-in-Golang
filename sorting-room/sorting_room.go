@@ -67,7 +67,7 @@ func DescribeAnything(i interface{}) string {
 		floatValue := float64(i.(int))
 		value = DescribeNumber(floatValue)
 	case float64:
-		// this is calles type assertions
+		// this is called type assertions
 		value = DescribeNumber(i.(float64))
 	case NumberBox:
 		value = DescribeNumberBox(i.(NumberBox))
