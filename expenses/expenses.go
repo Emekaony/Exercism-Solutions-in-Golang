@@ -66,6 +66,8 @@ type CategoryError struct {
 	category string
 }
 
+// when something implements the Error() method.
+// if u have to return an error, then the Error() method will be called.
 func (c *CategoryError) Error() string {
 	return fmt.Sprintf("error(unknown category %s)", c.category)
 }
